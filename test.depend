@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1680515917 source:d:\bachdz\test\main.cpp
+	"SDL_utils.h"
+
+1680515705 d:\bachdz\test\sdl_utils.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<bits/stdc++.h>
+
