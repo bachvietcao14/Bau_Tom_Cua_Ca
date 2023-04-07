@@ -271,16 +271,14 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer)
 
     window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_CENTERED,
        SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    //window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_CENTERED,
-    //   SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP);
+
     if (window == nullptr) logSDLError(std::cout, "CreateWindow", true);
 
 
-    //Khi thÃ´ng thÆ°á»ng cháº¡y vá»›i mÃ´i trÆ°á»ng bÃ¬nh thÆ°á»ng á»Ÿ nhÃ
+
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
                                               SDL_RENDERER_PRESENTVSYNC);
-    //Khi cháº¡y á»Ÿ mÃ¡y thá»±c hÃ nh WinXP á»Ÿ trÆ°á»ng (mÃ¡y áº£o)
-    //renderer = SDL_CreateSoftwareRenderer(SDL_GetWindowSurface(window));
+
     if (renderer == nullptr) logSDLError(std::cout, "CreateRenderer", true);
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");

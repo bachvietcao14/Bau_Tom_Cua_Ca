@@ -32,9 +32,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="SDL_utils.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="SDL_utils.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
