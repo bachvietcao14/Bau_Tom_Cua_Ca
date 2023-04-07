@@ -1,8 +1,22 @@
-#include "SDL_utils.h"
+#include <iostream>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <bits/stdc++.h>
+
+
+using namespace std;
+
 //**************************************************************
 const int SCREEN_WIDTH = 1600;
 const int SCREEN_HEIGHT = 900;
-const string WINDOW_TITLE = "Bầu tôm cua cá";
+const string WINDOW_TITLE = "Keyboard in SDL";
+void initSDL(SDL_Window* &window, SDL_Renderer* &renderer);
+void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
+void waitUntilKeyPressed();
+void TTF();
+SDL_Texture* loadTexture(string path, SDL_Renderer* renderer);
+SDL_Texture* loadText(SDL_Renderer* renderer, std::string text, TTF_Font* font, SDL_Color color);
 const string a[6]={"photos/naipro.png","photos/baupro.png","photos/meopro.png","photos/capro.png","photos/cuapro.png","photos/tompro.png"};
 string xucxac(const string a[],int b){
   if (b==1)return a[0];
@@ -24,13 +38,12 @@ int thang(int x1,int x2,int x3,int x4,int x5,int x6,int k){
 
 int* create_random_array(int size, int min_value, int max_value) {
     srand(time(nullptr));
-    int* arr = new int[size];  // tÃ¡ÂºÂ¡o mÃ¡Â»â„¢t mÃ¡ÂºÂ£ng Ã„â€˜Ã¡Â»â„¢ng
+    int* arr = new int[size];
     for (int i = 0; i < size; i++) {
-        arr[i] = rand() % (max_value - min_value + 1) + min_value;  // tÃ¡ÂºÂ¡o ra giÃƒÂ¡ trÃ¡Â»â€¹ ngÃ¡ÂºÂ«u nhiÃƒÂªn trong phÃ¡ÂºÂ¡m vi tÃ¡Â»Â« min_value Ã„â€˜Ã¡ÂºÂ¿n max_value
+        arr[i] = rand() % (max_value - min_value + 1) + min_value;  // tÃƒ ¡Ã‚ ºÃ‚ ¡o ra giÃƒÆ’Ã‚ ¡ trÃƒ ¡Ã‚ »Ã¢â‚¬ ¹ ngÃƒ ¡Ã‚ ºÃ‚ «u nhiÃƒÆ’Ã‚ ªn trong phÃƒ ¡Ã‚ ºÃ‚ ¡m vi tÃƒ ¡Ã‚ »Ã‚ « min_value Ãƒâ€žÃ¢â‚¬ËœÃƒ ¡Ã‚ ºÃ‚ ¿n max_value
     }
     return arr;
 }
-
 
 //**************************************************************
 int main(int argc, char* argv[])
@@ -44,16 +57,16 @@ int main(int argc, char* argv[])
     TTF_Font* font = TTF_OpenFont("bach.ttf", 100);
     TTF_Font* font1 = TTF_OpenFont("bach.ttf", 30);
     unsigned int score=10000;
-    int i=2;
     SDL_Rect rect1={730,125,70,70};
     SDL_Rect rect2={805,125,70,70};
     SDL_Rect rect3={765,200,70,70};
     SDL_Rect rectpoint={285,150,100,100};
 
-    while(score!=0){
+    bool quit = 0;
+        SDL_Event event;
+    while(!quit){
     bool checkPlay=0;
-    SDL_Event event;
-        unsigned int x1=0,x2=0,x3=0,x4=0,x5=0,x6=0;
+    unsigned int x1=0,x2=0,x3=0,x4=0,x5=0,x6=0;
         while(!checkPlay){
     string datnai=to_string(x1);
     string datbau=to_string(x2);
@@ -87,12 +100,18 @@ int main(int argc, char* argv[])
     SDL_RenderPresent(renderer);
 
             while(SDL_PollEvent(&event)) {
-                    if(event.type == SDL_QUIT){
-                    quitSDL;
+                if(event.type == SDL_QUIT){
+                    quitSDL(window,renderer);
                     TTF_Quit();
                     return 0;
                 }
-                    if(event.type == SDL_MOUSEBUTTONDOWN){
+                if(event.type==SDL_KEYDOWN&&event.key.keysym.sym==SDLK_ESCAPE){
+                    quitSDL(window,renderer);
+                    TTF_Quit();
+                    return 0;
+                }
+
+                if(event.type == SDL_MOUSEBUTTONDOWN){
                        if(event.button.button == SDL_BUTTON_LEFT){
                         int x, y;
                         SDL_GetMouseState(&x, &y);
@@ -137,26 +156,29 @@ int main(int argc, char* argv[])
          SDL_DestroyTexture(ca1);
          SDL_DestroyTexture(cua1);
          SDL_DestroyTexture(tom1);
-         SDL_DestroyTexture(bg);
         }
 
 
 
 
     // render graphics
-    int* b=create_random_array(3,1,6);
+    int* k=create_random_array(3,1,6);
+    int b[3]={k[0],k[1],k[2]};
+    SDL_Delay(10);
     SDL_Texture* xucxac1=loadTexture(xucxac(a,b[0]),renderer);
     SDL_Texture* xucxac2=loadTexture(xucxac(a,b[1]),renderer);
     SDL_Texture* xucxac3=loadTexture(xucxac(a,b[2]),renderer);
     SDL_RenderCopy(renderer,xucxac1,NULL,&rect1);
     SDL_RenderCopy(renderer,xucxac2,NULL,&rect2);
     SDL_RenderCopy(renderer,xucxac3,NULL,&rect3);
-    for (int i = 0 ; i < 3 ; i++){
-        score=score+2*thang(x1,x2,x3,x4,x5,x6,b[i]);
-    }
+    map<int,int> congdiem;
+    for (auto r:b){congdiem[r]++;}
+    for (auto k:congdiem){
 
+        score=score+ (k.second+1)*thang(x1,x2,x3,x4,x5,x6,k.first);
+    }
     SDL_RenderPresent(renderer);
-    bool tieptuc=true;
+    if(score!=0){bool tieptuc=true;
     while(tieptuc){
     while(SDL_PollEvent(&event)) {
                     if(event.type == SDL_QUIT){
@@ -173,12 +195,14 @@ int main(int argc, char* argv[])
                     }
     }
     }
+    }
     SDL_DestroyTexture(xucxac1);
     SDL_DestroyTexture(xucxac2);
     SDL_DestroyTexture(xucxac3);
     SDL_RenderClear(renderer);
+    if(score==0)quit=1;
     }
-    SDL_Delay(1000);
+    SDL_RenderClear(renderer);
 
 
     // Your code here
@@ -187,7 +211,12 @@ int main(int argc, char* argv[])
     quitSDL(window, renderer);
     return 0;
 }
-// Các hàm chung về khởi tạo và huỷ SDL
+
+
+
+
+//*****************************************************
+// CÃ¡c hÃ m chung vá» khá»Ÿi táº¡o vÃ  huá»· SDL
 SDL_Texture* loadTexture(string path, SDL_Renderer* renderer){
     SDL_Texture* newTexture = nullptr;
     SDL_Surface* loadedSurface = IMG_Load(path.c_str());
@@ -205,14 +234,14 @@ SDL_Texture* loadTexture(string path, SDL_Renderer* renderer){
     return newTexture;
 }
 SDL_Texture* loadText(SDL_Renderer* renderer, std::string text, TTF_Font* font, SDL_Color color) {
-    // Tạo surface từ chuỗi văn bản
+    // Táº¡o surface tá»« chuá»—i vÄƒn báº£n
     SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
     if (surface == NULL) {
         std::cerr << "Unable to create surface from text! SDL_ttf Error: " << TTF_GetError() << std::endl;
         return NULL;
     }
 
-    // Tạo texture từ surface và trả về
+    // Táº¡o texture tá»« surface vÃ  tráº£ vá»
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
     return texture;
@@ -242,9 +271,16 @@ void initSDL(SDL_Window* &window, SDL_Renderer* &renderer)
 
     window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_CENTERED,
        SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    //window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_CENTERED,
+    //   SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (window == nullptr) logSDLError(std::cout, "CreateWindow", true);
+
+
+    //Khi thÃ´ng thÆ°á»ng cháº¡y vá»›i mÃ´i trÆ°á»ng bÃ¬nh thÆ°á»ng á»Ÿ nhÃ
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
                                               SDL_RENDERER_PRESENTVSYNC);
+    //Khi cháº¡y á»Ÿ mÃ¡y thá»±c hÃ nh WinXP á»Ÿ trÆ°á»ng (mÃ¡y áº£o)
+    //renderer = SDL_CreateSoftwareRenderer(SDL_GetWindowSurface(window));
     if (renderer == nullptr) logSDLError(std::cout, "CreateRenderer", true);
 
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
@@ -265,13 +301,8 @@ void waitUntilKeyPressed()
         if ( SDL_WaitEvent(&e) != 0 &&
              (e.type == SDL_KEYDOWN || e.type == SDL_QUIT) )
             return;
-        SDL_Delay(100);
+        SDL_Delay(50);
     }
 }
-
-
-
-
-//*****************************************************
-
 //**************************************************************
+
