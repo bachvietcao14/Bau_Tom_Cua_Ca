@@ -1,4 +1,4 @@
-------------------------------------------------------------------Bau_Tom_Cua_Ca------------------------------------------------------------------------------------
+------------------------------------------------------------------Bau_Tom_Cua_Ca-----------------------------------------------------
 1.Giới thiệu về game
 
 -Nguồn gốc xuất xứ : Lắc bầu cua hay là bầu cua tôm cá hay bầu cua cá mèo là một trò chơi mang tính cờ bạc phổ biến ở Việt Nam. Người Việt Nam thường chơi trò này vào các dịp lễ, đặc biệt là Tết Nguyên Đán. Trò chơi có cách chơi ngẫu nhiên, tương tự trò Roulette của phương Tây.
