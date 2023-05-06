@@ -11,11 +11,14 @@
 
 2.Tải và cài đặt:
 -Tải Code::Block:Code::Blocks: http://www.codeblocks.org/downloads/binaries/
+
 -Cài đặt thư viện SDL2(SDL, SDL_image, SDL_ttf, SDL_mixer) cho C++ :
+
  SDL2 : https://github.com/libsdl-org/SDL/releases/tag/release-2.26.2
  SDL_image: https://github.com/libsdl-org/SDL_image/releases/tag/release-2.6.2
  SDL_mixer: https://github.com/libsdl-org/SDL_mixer/releases/tag/release-2.6.3
  SDL_ttf: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.
+ 
 -Liên kết codeblock với các thư viện
 Xem hướng dẫn tại :
     SDL: https://www.youtube.com/watch?v=kxi0TMXEG3g&t=1s
