@@ -25,8 +25,8 @@
 -Liên kết codeblock với các thư viện
 Xem hướng dẫn tại :
 
-    SDL: https://www.youtube.com/watch?v=kxi0TMXEG3g&t=1s
+ SDL:  https://www.youtube.com/watch?v=kxi0TMXEG3g&t=1s
 				
-    SDL_image,...: https://www.youtube.com/watch?v=DoRyZaFZekQ&t=1178s
+ SDL_image,...: https://www.youtube.com/watch?v=DoRyZaFZekQ&t=1178s
 				
 -Tải Repository 
