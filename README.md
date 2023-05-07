@@ -24,11 +24,11 @@ B2:Cài đặt thư viện SDL2(SDL, SDL_image, SDL_ttf, SDL_mixer) cho C++ :
  -SDL_ttf: https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.
  
  -Liên kết codeblock với các thư viện
- Xem hướng dẫn tại :
+ 	Xem hướng dẫn tại :
 
- SDL:  https://www.youtube.com/watch?v=kxi0TMXEG3g&t=1s
+ 	SDL:  https://www.youtube.com/watch?v=kxi0TMXEG3g&t=1s
 				
- SDL_image,...: https://www.youtube.com/watch?v=DoRyZaFZekQ&t=1178s
+ 	SDL_image,...: https://www.youtube.com/watch?v=DoRyZaFZekQ&t=1178s
 				
 B3:Tải Repository 
 
